@@ -9,7 +9,7 @@ import struct
 import time
 
 # 初始化OpenAI客户端
-OPEN_API_KEY = 'your_key'# 改为你的OpenAI API key
+OPEN_API_KEY = 'your_key' #  改为你的OpenAI API key
 client = OpenAI(api_key=OPEN_API_KEY)
 
 def record_audio(duration=5, filename="output.wav", samplerate=16000):
@@ -34,7 +34,7 @@ def speech_to_text(api_key, file_path):
         )
         return response.text
 
-def send_to_iphone(kaomoji, audio_file, host='192.168.101.10', port=12345):# 改为你的手机IP地址
+def send_to_iphone(kaomoji, audio_file, host='192.168.101.10', port=12345): #  改为你的手机IP地址
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((host, port))
@@ -59,7 +59,7 @@ def play_audio(file_path):
 def main():
     while True:
         # Record user's speech
-        record_audio(duration=5, filename="user_input.wav", samplerate=16000)# 录音不能自动停止，所以设置了固定的录音时长5秒，可以修改
+        record_audio(duration=5, filename="user_input.wav", samplerate=16000) #  录音不能自动停止，所以设置了固定的录音时长5秒，可以修改
         
         # Convert speech to text
         user_text = speech_to_text(OPEN_API_KEY, "user_input.wav")
@@ -82,14 +82,14 @@ def main():
         # Convert text to speech and send data
         speech_response = client.audio.speech.create(
             model="tts-1",
-            voice="onyx",# 机器人的音色，可以参考OPENAI API DOCS修改
+            voice="onyx", #  机器人的音色，可以参考OPENAI API DOCS修改
             input=result['response'],
         )
         speech_response.stream_to_file("output.mp3")
         send_to_iphone(result['kaomoji'], "output.mp3")
 
         # Wait for 5 seconds before starting a new recording
-        time.sleep(8)# 为了避免程序过快进入录音，而造成把机器人的回复录下来的情况，这里设置了每次发送完回复要等8秒，可修改
+        time.sleep(8) #  为了避免程序过快进入录音，而造成把机器人的回复录下来的情况，这里设置了每次发送完回复要等8秒，可修改
 
 
 if __name__ == "__main__":
