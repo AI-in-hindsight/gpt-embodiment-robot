@@ -66,8 +66,8 @@ threading.Thread(target=listen_socket, daemon=True).start()
 while running:
     success, img = cap.read()
     
-    # 如果距离上次接收到数据已经超过1000秒,则进行视觉跟踪
-    if time.time() - last_data_time > 1000:
+    # 如果距离上次接收到数据已经超过10秒,则进行视觉跟踪
+    if time.time() - last_data_time > 10:
         img, bboxs = detector.findFaces(img, draw=False)
 
         if bboxs:
