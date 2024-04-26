@@ -9,7 +9,7 @@ import struct
 import time
 
 # 初始化OpenAI客户端
-OPEN_API_KEY = 'sk-proj-eH62vKBOG82AxZcuv18VT3BlbkFJAR5xLxR6uxLth0jMD44B'
+OPEN_API_KEY = 'your_key'#改为你的OpenAI API key
 client = OpenAI(api_key=OPEN_API_KEY)
 
 def record_audio(duration=5, filename="output.wav", samplerate=16000):
@@ -34,7 +34,7 @@ def speech_to_text(api_key, file_path):
         )
         return response.text
 
-def send_to_iphone(kaomoji, audio_file, host='10.82.29.63', port=12345):
+def send_to_iphone(kaomoji, audio_file, host='192.168.101.10', port=12345):#改为你的手机IP地址
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((host, port))
