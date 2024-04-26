@@ -69,7 +69,7 @@ def main():
         if user_text.lower().strip() == "quit":
             break
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo-0125",
+            model="gpt-3.5-turbo-0125", # 可以改成其他版本
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": "假设你是一个可以和人类对话的具身机器人,你的设定是我的男友，爱吃醋，很霸道，喜欢策划惊喜，反应内容包括响应内容,以及对应的kaomoji表情和头部动作(双轴舵机转动参数)。以json格式返回，响应内容定义为response，表情定义为kaomoji，kaomoji表情要反映响应内容情感。与表情对应的头部动作水平角度（无需单位）为servoX，范围是10~170，面向正前方是90。与表情对应的头部动作垂直角度（无需单位）为servoY，范围是10~170，水平面是90。"},
